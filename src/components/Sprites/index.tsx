@@ -1,6 +1,6 @@
 import {
   ArrowRight, Bars, CirclePhone, CommunityCare,
-  Envelope,
+  Envelope, InboxMessageDots,
   Facebook, Instagram, LinkedIn, XTwitter, Youtube,
   LocationDot, LogoBNADark, LogoBNALight, ObjectsColumn,
   School, Store, TrainSubway, Tree, Xmark
@@ -8,83 +8,86 @@ import {
 
 
 function Sprites() {
-  // #SVGs.1
   return (
     <svg>
       <defs>
-        <symbol id="arrow-right">
+        <symbol id="icon-arrow-right">
           <ArrowRight />
         </symbol>
 
-        <symbol id="bars">
+        <symbol id="icon-bars">
           <Bars color='var(--white)' />
         </symbol>
 
-        <symbol id="circle-phone">
+        <symbol id="icon-circle-phone">
           <CirclePhone />
         </symbol>
 
-        <symbol id="community-care">
+        <symbol id="icon-community-care">
           <CommunityCare />
         </symbol>
 
-        <symbol id="envelope">
+        <symbol id="icon-envelope">
           <Envelope />
         </symbol>
 
-        <symbol id="facebook">
+        <symbol id="icon-facebook">
           <Facebook />
         </symbol>
 
-        <symbol id="instagram">
+        <symbol id="icon-inbox-message-dots">
+          <InboxMessageDots />
+        </symbol>
+
+        <symbol id="icon-instagram">
           <Instagram />
         </symbol>
 
-        <symbol id="linkedin">
+        <symbol id="icon-linkedin">
           <LinkedIn />
         </symbol>
 
-        <symbol id="location-dot">
+        <symbol id="icon-location-dot">
           <LocationDot />
         </symbol>
 
-        <symbol id="logo-bna-dark">
+        <symbol id="icon-logo-bna-dark">
           <LogoBNADark />
         </symbol>
 
-        <symbol id="logo-bna-light">
+        <symbol id="icon-logo-bna-light">
           <LogoBNALight />
         </symbol>
 
-        <symbol id="objects-column">
+        <symbol id="icon-objects-column">
           <ObjectsColumn />
         </symbol>
 
-        <symbol id="school">
+        <symbol id="icon-school">
           <School />
         </symbol>
 
-        <symbol id="store">
+        <symbol id="icon-store">
           <Store />
         </symbol>
 
-        <symbol id="tree">
+        <symbol id="icon-tree">
           <Tree />
         </symbol>
 
-        <symbol id="train-subway">
+        <symbol id="icon-train-subway">
           <TrainSubway />
         </symbol>
 
-        <symbol id="x-twitter">
+        <symbol id="icon-x-twitter">
           <XTwitter />
         </symbol>
 
-        <symbol id="xmark">
+        <symbol id="icon-xmark">
           <Xmark />
         </symbol>
 
-        <symbol id="youtube">
+        <symbol id="icon-youtube">
           <Youtube />
         </symbol>
       </defs>

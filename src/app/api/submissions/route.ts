@@ -1,62 +1,104 @@
-import { type NextRequest } from 'next/server'
+import { type NextRequest } from 'next/server';
+import { cookies } from 'next/headers';
 
-export async function GET(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams
-  const statusFilter = searchParams.get("status");
-  let filter = "?";
-  if (statusFilter != null) {
-    filter += `status=${statusFilter}`
-  }
-  const resp = await fetch("https://api.peopleforbikes.xyz/cities/submissions" + filter);
 
-  if (!resp.ok) {
-    throw new Error("Failed to fetch data");
-  }
+function setCookieAccessToken(name: string) {
+  const cookieStore = cookies();
+  let accessToken = null;
 
-  const data = await resp.json()
-  return Response.json({ data })
+  cookieStore.getAll().forEach(({ name, value }) => {
+    if (name.endsWith('.accessToken')) {
+      cookieStore.set('accessToken', value);
+      accessToken = value;
+    }
+  });
+
+  return accessToken;
 }
 
+function getCookieAccessToken(name: string) {
+  const cookieStore = cookies();
+  let cookie = cookieStore.get(name);
 
-export async function PATCH(request: NextRequest) {
-  const searchParams = request.nextUrl.searchParams
-  const cognito_access = searchParams.get('cognito_access');
-  const body = await request.json();
-  const body_str = JSON.stringify(body)
+  if (!cookie) return setCookieAccessToken(name);
+  return cookie;
+}
+
+async function GET(request: NextRequest) {
+  const accessToken = getCookieAccessToken('accessToken');
+
+  const searchParams = request.nextUrl.searchParams;
+  const statusFilter = searchParams.get('status');
+  let filter = statusFilter !== null
+    ? `status=${statusFilter}`
+    : '';
+
   const metadata = {
-    method: "PATCH",
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${cognito_access}`,
+      'Authorization': `Bearer ${accessToken}`
+    }
+  };
+  const resp = await fetch(`https://api.peopleforbikes.xyz/cities/submissions?${filter}`, metadata);
+
+  if (!resp.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  const data = resp.json();
+  return Response.json({ data });
+}
+
+async function PATCH(request: NextRequest) {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken');
+
+  const payload = await request.json();
+  const body = JSON.stringify(payload);
+
+  const metadata = {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`
     },
-    body:body_str
+    body
   };
   const resp = await fetch(`https://api.peopleforbikes.xyz/cities/submissions/${body.id}`, metadata);
 
   if (!resp.ok) {
-    throw new Error("Failed to update data: " + body_str);
+    throw new Error(`Failed to update data: ${body}`);
   }
 
-  const data = await resp.json()
-  return Response.json({ data })
+  const data = resp.json();
+  return Response.json({ data });
 }
 
-export async function POST(request: NextRequest) {
-  const body = await request.json();
-  const body_str = JSON.stringify(body)
+async function POST(request: NextRequest) {
+  const cookieStore = cookies();
+  const accessToken = cookieStore.get('accessToken');
+
+  const payload = await request.json();
+  const body = JSON.stringify(payload);
+
   const metadata = {
-    method: "POST",
+    method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`
     },
-    body:body_str
+    body
   };
-  const resp = await fetch("https://api.peopleforbikes.xyz/cities/submissions", metadata);
+  const resp = await fetch('https://api.peopleforbikes.xyz/cities/submissions', metadata);
 
   if (!resp.ok) {
-    throw new Error("Failed to update data: " + body_str);
+    throw new Error(`Failed to update data: ${body}`);
   }
 
-  const data = await resp.json()
-  return Response.json({ data })
+  const data = resp.json();
+  return Response.json({ data });
 }
+
+
+export { GET, PATCH, POST };

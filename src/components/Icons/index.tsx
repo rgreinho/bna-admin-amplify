@@ -1,3 +1,16 @@
+import type { SVGProps } from 'react';
+import styles from './styles.module.css';
+
+
+function Icon({ name, className='', ...props }: SVGProps<SVGSVGElement> & { name: string }) {
+  return (
+    <svg className={`${styles[`icon-${name}`]} ${className}`} {...props}>
+      <use href={`#icon-${name}`} />
+    </svg>
+  );
+}
+
+
 export { default as ArrowRight } from './ArrowRight';
 // import ArrowsMaximize from './ArrowsMaximize';
 // import ArrowsMinimize from './ArrowsMinimize';
@@ -8,6 +21,7 @@ export { default as CirclePhone } from './CirclePhone';
 export { default as CommunityCare } from './CommunityCare';
 export { default as Envelope } from './Envelope';
 export { default as Facebook } from './Facebook';
+export { default as InboxMessageDots } from './InboxMessageDots';
 export { default as Instagram } from './Instagram';
 // import LayerDouble from './LayerDouble';
 export { default as LinkedIn } from './LinkedIn';
@@ -28,16 +42,4 @@ export { default as Tree } from './Tree';
 export { default as XTwitter } from './XTwitter';
 export { default as  Xmark } from './Xmark';
 export { default as Youtube } from './Youtube';
-
-
-function Icons({ name, ...props }) {
-  return (
-    <svg {...props}>
-      <use href={`#${name}`} />
-    </svg>
-  )
-}
-
-
-export default Icons;
-// investigate if Next.js reloads the SVGs per page or are they cached?
+export default Icon;

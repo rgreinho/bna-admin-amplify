@@ -3,6 +3,7 @@ import '@Styles/resets.css';
 import '@Styles/base.css';
 import '@Styles/layout.css';
 import '@Styles/theme.css';
+import '@Styles/utilities.css';
 
 import AmplifyAuth from '@Components/AmplifyAuth';
 

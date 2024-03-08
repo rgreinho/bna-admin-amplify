@@ -1,0 +1,10 @@
+.container {
+  padding-block: var(--50px);
+
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid var(--border-gray);
+}

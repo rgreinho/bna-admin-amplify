@@ -1,32 +1,20 @@
 @layer utilities {
-  /* Spacing */
-  .w-25 {
-    width: 25px;
-  }
-  .h-24 {
-    height: 24px;
+  .hidden {
+    display: none;
   }
 
-
-  /* Text */
-  .text-12 {
-    font-size: var(--12px);
-  }
-  .text-16 {
-    font-size: var(--16px);
-  }
-
-  .text-deep-navy {
-    color: var(--deep-navy);
-  }
-  .text-white {
-    color: var(--white);
-  }
-
-  .bg-yellow {
-    background-color: var(--yellow);
-  }
-  .bg-cyan {
-    background-color: var(--cyan);
+  /*
+   * a11y
+   * visually hidden from display, but still accessible to screen readers
+   */
+  .visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
   }
 }
