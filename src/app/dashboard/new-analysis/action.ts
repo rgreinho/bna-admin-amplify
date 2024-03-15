@@ -1,7 +1,6 @@
 'use server';
 
 import { cookies } from 'next/headers';
-import { revalidatePath } from 'next/cache';
 
 import formSchema from './schema';
 import { ZodIssue } from 'zod';
@@ -15,15 +14,6 @@ type Result = {
 };
 
 async function ServerAction(prevState: Result, formData: FormData): Promise<Result> {
-
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      // resolve({ success: true, errors: null });
-      resolve({ success: false, errors: [{ message: 'Server error' }] });
-      revalidatePath('/dashboard/new-analysis');
-    }, 3000);
-  });
-
   const _formData = {
     country: formData.get('country') as string,
     city: formData.get('city') as string,
@@ -60,7 +50,7 @@ async function ServerAction(prevState: Result, formData: FormData): Promise<Resu
   };
 
   try {
-    const resp = await fetch('https://api.peopleforbikes.xyz/bnas/enqueue', metadata);
+    const resp = await fetch(`${process.env.BNA_API_URL}/bnas/enqueue`, metadata);
 
     if (!resp.ok) {
       console.error(resp.headers);

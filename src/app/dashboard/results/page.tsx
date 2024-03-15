@@ -22,7 +22,7 @@ async function Page() {
   };
 
   try {
-    const resp = await fetch('https://api.peopleforbikes.xyz/bnas/results', metadata);
+    const resp = await fetch(`${process.env.BNA_API_URL}/bnas/results`, metadata);
 
     if (!resp.ok) {
       console.error(resp.text());

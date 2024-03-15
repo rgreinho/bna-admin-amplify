@@ -22,7 +22,7 @@ async function Page() {
   };
 
   try {
-    const resp = await fetch(`https://api.peopleforbikes.xyz/cities/submissions?status=Pending`, metadata);
+    const resp = await fetch(`${process.env.NEXT_PUBLIC_BNA_API_URL}/cities/submissions?status=Pending`, metadata);
 
     if (!resp.ok) {
       console.error(await resp.text());
