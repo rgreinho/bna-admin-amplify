@@ -13,19 +13,6 @@
   display: flex;
   flex-flow: column nowrap;
   row-gap: 40px;
-
-  button {
-    display: flex;
-    width: 335px;
-    height: 56px;
-    padding: 20px 30px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    color: var(--White, #FFFFFF);
-    background: var(--BNA-cyan, #009EDB);
-    cursor: pointer;
-  }
 }
 
 .input-container {

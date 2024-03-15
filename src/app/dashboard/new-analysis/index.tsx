@@ -3,16 +3,19 @@
 import { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 import { useForm } from 'react-hook-form';
-import styles from './styles.module.css';
+
+import SubmitButton from '@Components/SubmitButton';
 
 import ServerAction from './action';
 import { FormSchema } from './schema';
+import styles from './styles.module.css';
 
 
 function NewAnalysis() {
   const {
-    register,
     clearErrors,
+    register,
+    reset,
     setError,
     formState: { isValid, errors }
   } = useForm<FormSchema>({
@@ -32,7 +35,7 @@ function NewAnalysis() {
   const [serverReply, formAction] = useFormState(ServerAction, initialState);
 
   useEffect(() => {
-    if (serverReply?.errors?.length > 0) {
+    if (serverReply.errors && serverReply.errors.length > 0) {
       clearErrors();
 
       for (const error of serverReply.errors) {
@@ -40,13 +43,23 @@ function NewAnalysis() {
         setError(name, { message });
       };
     }
-  }, [serverReply?.errors]);
+
+    if (serverReply.success) {
+      reset();
+    }
+  }, [clearErrors, reset, setError, serverReply]);
 
   return (
     <section className={styles['layout']}>
       <h1>Submit a New Analysis</h1>
 
       <form className={styles['form']} action={formAction}>
+
+        { serverReply.success
+          ? <p className={styles['success']}>Analysis submitted successfully!</p>
+          : null
+        }
+
         <div className={styles['input-container']}>
           <label htmlFor="country">Country</label>
           <input id="country"
@@ -72,17 +85,14 @@ function NewAnalysis() {
           <label htmlFor="fips_code">FIPS Code</label>
           <input id="fips_code"
             {...register('fips_code', { required: true })}
-          />
-        </div>
+        />
+      </div>
 
-        <button type="submit">
-          Submit
-        </button>
-      </form>
+      <SubmitButton text="Submit" />
+    </form>
 
     </section>
   );
 }
-
 
 export default NewAnalysis;

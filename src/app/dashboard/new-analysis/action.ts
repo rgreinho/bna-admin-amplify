@@ -1,20 +1,29 @@
 'use server';
 
 import { cookies } from 'next/headers';
+import { revalidatePath } from 'next/cache';
 
 import formSchema from './schema';
-import { ZodError } from 'zod';
+import { ZodIssue } from 'zod';
 
 
 type Result = {
   success: boolean,
-  errors?: Array<{
-    path: string;
+  errors: Array<{
     message: string;
-  }> | null | ZodError
+  }> | null | ZodIssue[]
 };
 
 async function ServerAction(prevState: Result, formData: FormData): Promise<Result> {
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      // resolve({ success: true, errors: null });
+      resolve({ success: false, errors: [{ message: 'Server error' }] });
+      revalidatePath('/dashboard/new-analysis');
+    }, 3000);
+  });
+
   const _formData = {
     country: formData.get('country') as string,
     city: formData.get('city') as string,
@@ -56,18 +65,14 @@ async function ServerAction(prevState: Result, formData: FormData): Promise<Resu
     if (!resp.ok) {
       console.error(resp.headers);
       console.error(await resp.text());
-      throw new Error(`Failed to fetch data: ${JSON.stringify(metadata)}`);
+      return { success: false, errors: [{ message: 'Server error' }] };
     }
 
-    console.log(await resp.json());
+    return { success: true, errors: null };
   } catch (error) {
-    console.error(error);
+    console.error('Request Error', error);
+    return { success: false, errors: [{ message: 'Server error' }] };
   }
-
-  return {
-    success: true,
-    errors: null
-  };
 }
 
 
