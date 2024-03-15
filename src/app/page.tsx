@@ -5,7 +5,7 @@ import { getCurrentUser } from 'aws-amplify/auth';
 async function Page() {
   try {
     await getCurrentUser();
-    redirect('/dashboard');
+    redirect('/dashboard/submissions');
   } catch (err) {
     redirect('/login');
   }

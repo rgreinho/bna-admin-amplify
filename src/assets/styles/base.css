@@ -12,8 +12,11 @@
 
     width: 100%;
     max-width: 1440px;
-    min-height: 100vh;
+    min-height: 100%;
     margin: 0 auto;
+
+    display: grid;
+    grid-template-rows: auto 1fr auto;
 
     font-family: 'Montserrat';
     font-weight: var(--regular);
@@ -49,14 +52,17 @@
   h1 {
     font-size: var(--40px);
     letter-spacing: var(--ls-1px);
+    margin: .67em 0;
   }
   h2 {
     font-size: var(--34px);
     letter-spacing: var(--ls-0_7px);
+    margin: .75em 0
   }
   h3 {
     font-size: var(--28px);
     letter-spacing: var(--ls-0_7px);
+    margin: .83em 0
   }
 
   button {
@@ -70,11 +76,11 @@
       letter-spacing: var(--ls-1_5px);
     }
     h2 {
-      font-size: var(--50px);
+      font-size: var(--48px);
       letter-spacing: var(--ls-1_25px);
     }
     h3 {
-      font-size: var(--34px);
+      font-size: var(--32px);
       letter-spacing: var(--ls-0_85px);
     }
   }

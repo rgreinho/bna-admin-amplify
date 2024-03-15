@@ -8,20 +8,31 @@
   box-shadow: var(--menu-shadow);
 
   & ul {
+    height: var(--52px);
     display: flex;
     flex-flow: row nowrap;
-    column-gap: 40px;
+
   }
 }
 
 .nav-item {
-  & a {
-    font-family: Dharma Gothic E;
-    font-size: var(--22px);
-    font-weight: var(--bold);
-    line-height: var(--lineheight-03);
-    letter-spacing: var(--letter-spacing-0_55px);
+  min-width: 8.375rem;
+  text-align: center;
+  color: var(--deep-navy);
 
-    color: var(--deep-navy);
+  & a {
+    display: block;
+    padding: 8px 20px;
+
+    font-family: Dharma Gothic E;
+    font-size: var(--24px);
+    font-weight: var(--bold);
+    line-height: 1.5;
+    letter-spacing: var(--ls-0_55px);
+  }
+
+  &.selected {
+    color: var(--white);
+    background-color: var(--deep-navy);
   }
 }

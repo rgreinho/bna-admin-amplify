@@ -1,0 +1,26 @@
+.layout {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  row-gap: var(--48px);
+
+  h1 {
+    align-self: flex-start;
+  }
+}
+
+.form {
+  display: flex;
+  flex-flow: column nowrap;
+  row-gap: 40px;
+}
+
+.input-container {
+  display: flex;
+  flex-flow: column nowrap;
+
+  input {
+    padding: 18px 0px 18px 20px;
+    border: 1px solid var(--Gray-5, #E0E0E0);
+  }
+}
