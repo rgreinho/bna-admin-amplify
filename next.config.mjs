@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // Use the CDN in production and localhost for development.
-  assetPrefix: process.env.IS_PROD === 'true'
-    ? 'https://cdn.mycdn.com'
-    : undefined,
+  // assetPrefix: process.env.IS_PROD === 'true'
+  //   ? 'https://cdn.mycdn.com'
+  //   : undefined,
 
   // https://nextjs.org/docs/app/api-reference/next-config-js/compress#changing-the-compression-algorithm
   // For self-hosting this will need to be updated
@@ -55,10 +55,10 @@ const nextConfig = {
     typedRoutes: true
   },
 
-  generateBuildId: async () => {
-    // This could be anything, using the latest git hash
-    return process.env.GIT_HASH;
-  },
+  // generateBuildId: async () => {
+  //   // This could be anything, using the latest git hash
+  //   return process.env.GIT_HASH;
+  // },
   generateEtags: true,
   httpAgentOptions: {
     keepAlive: true

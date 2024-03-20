@@ -4,8 +4,6 @@ import { Amplify } from 'aws-amplify';
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
-console.log('WTF', process.env);
-
 
 Amplify.configure({
   Auth: {
